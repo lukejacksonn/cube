@@ -1,10 +1,7 @@
 import { react, html, css } from 'https://unpkg.com/rplus';
 import { oll, pll } from './algorithms.js';
-window.cube.twistDuration = 500;
 
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
 let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 const algs = [...oll, ...pll];
@@ -73,6 +70,24 @@ const interpret = input =>
     .map(move => translations[move])
     .join('');
 
+const resetCamera = () => {
+  cube.rotation.set((25 * Math.PI) / 180, (-30 * Math.PI) / 180, 0);
+  cube.autoRotate = false;
+};
+
+window.resetCube = () => {
+  // cube.twistDuration = 0;
+  // [...cube.twistQueue.history].forEach(() => cube.undo());
+  window.cube = null;
+  const container = document.querySelector('#container');
+  const ncube = new ERNO.Cube({ twistDuration: 500 });
+  container.innerHTML = '';
+  container.appendChild(ncube.domElement);
+  window.cube = ncube;
+};
+
+const pause = input => (window.cube.paused = true);
+const play = input => (window.cube.paused = false);
 const executeSequence = input => window.cube.twist(interpret(input));
 const executeSequenceReverse = input =>
   window.cube.twist(
@@ -86,21 +101,29 @@ const Form = () => {
   const [input, setInput] = react.useState(algs[0].alg[0]);
   const [speed, setSpeed] = react.useState(500);
   return html`
-    <select onChange=${e => setInput(e.target.value)}>
+    <select
+      onChange=${e => {
+        setInput(e.target.value);
+      }}
+    >
       ${algs.map(
         (move, i) =>
           html`
-            <option value=${move.alg[0]}>${move.name} :: ${move.alg[0]}</option>
+            <option value=${move.alg[0]}
+              >${move.name} :: ${move.alg[0].replace(/ /g, '')}</option
+            >
           `
       )}
     </select>
     <input
+      key="speed"
       type="range"
       defaultValue=${speed}
       min="0"
       max="1000"
       onChange=${e => {
         window.cube.twistDuration = e.target.value;
+        setSpeed(e.target.value);
       }}
     />
     <button onClick=${e => executeSequenceReverse(input)}>

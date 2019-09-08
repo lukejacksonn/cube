@@ -23,9 +23,9 @@ body {
 #controls {
   display: flex;
   align-items: center;
-  padding: 0 1.38rem;
+  padding: 0;
   position: absolute;
-  bottom: 1.38rem;
+  bottom: 0;
   left: 0;
   width: 100%;
 }
@@ -43,7 +43,6 @@ input {
 
 input[type='range'] {
   flex: 1 1 100%;
-  margin-right: 1rem !important;
 }
 
 select {
@@ -74,6 +73,7 @@ input[type='range'] {
   -webkit-appearance: none;
   margin: 18px 0;
   width: 100%;
+  background: transparent;
 }
 input[type='range']:focus {
   outline: none;
@@ -83,7 +83,7 @@ input[type='range']::-webkit-slider-runnable-track {
   height: 8.4px;
   cursor: pointer;
   animate: 0.2s;
-  background: #222;
+  background: #111;
   border-radius: 1.3px;
 }
 input[type='range']::-webkit-slider-thumb {
@@ -96,5 +96,5 @@ input[type='range']::-webkit-slider-thumb {
   margin-top: -11px;
 }
 input[type='range']:focus::-webkit-slider-runnable-track {
-  background: #444;
+  /* background: #444; */
 }
