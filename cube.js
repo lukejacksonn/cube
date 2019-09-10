@@ -33,7 +33,7 @@ const style = {
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 0 2rem;
-    line-height: 138%;
+    line-height: 162%;
     cursor: pointer;
   `,
   controls: css`
@@ -58,8 +58,8 @@ const style = {
     }
   `,
   slider: css`
-    margin: 1.62rem 0 1.38rem;
-    max-width: 30rem;
+    margin: 2rem 0 1.62rem;
+    max-width: 40rem;
     width: 90%;
   `
 };

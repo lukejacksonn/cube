@@ -54,14 +54,14 @@ const Form = () => {
             top: 0;
             left: 0;
             width: 100%;
-            opacity: 0.8;
+            opacity: 0.62;
             &:hover {
               opacity: 1;
               transform: scale(1.1);
             }
           }
-          h5 {
-            color: #fff;
+          h1 {
+            color: #666;
           }
         `}
       >
