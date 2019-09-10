@@ -14,14 +14,14 @@ const imageForCase = alg => {
 };
 
 const Form = () => {
-  const [input, setInput] = react.useState(0);
+  const [stage, setStage] = react.useState(location.pathname.slice(1));
+  const [i, setI] = react.useState(parseInt(location.search.slice(1)));
 
-  const cases = algs[location.pathname.slice(1)];
-  const i = parseInt(location.search.slice(1)) || 0;
+  const cases = algs[stage];
+  let a = cases[i || 0].alg[0];
 
-  let a = cases[i].alg[0];
   return html`
-    <${Cube} key=${a} alg=${a} />
+    <${Cube} key="cube" alg=${a} />
     <nav
       className=${css`
         @media (orientation: landscape) {
@@ -43,7 +43,7 @@ const Form = () => {
       <div
         className=${css`
           display: flex;
-          a {
+          > * {
             flex: 1 1 100%;
             text-align: center;
             color: #fff;
@@ -58,16 +58,23 @@ const Form = () => {
           }
         `}
       >
-        <a href="/oll">F2L</a>
-        <a href="/oll">OLL</a>
-        <a href="/pll">PLL</a>
+        <button onClick=${e => setStage('f2l')}>f2l</button>
+        <button onClick=${e => setStage('oll')}>oll</button>
+        <button onClick=${e => setStage('pll')}>pll</button>
       </div>
       <div
         className=${css`
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(101px, 1fr));
-          grid-gap: 1rem;
+          grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+          grid-gap: 0.62rem;
+          > a {
+            width: 100%;
+            padding-top: 100%;
+          }
           img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             opacity: 0.8;
             &:hover {
@@ -75,12 +82,22 @@ const Form = () => {
               transform: scale(1.1);
             }
           }
+          h5 {
+            color: #fff;
+          }
         `}
       >
         ${cases.map(
           (move, i) => html`
-            <a href=${`?${i}`}>
+            <a
+              key=${move.alg[0]}
+              onClick=${e => {
+                e.preventDefault();
+                setI(i);
+              }}
+            >
               <img id=${move.name} src=${imageForCase(move.alg[0])} />
+              <h1>${move.name}</h1>
             </a>
           `
         )}
@@ -95,20 +112,3 @@ react.render(
   `,
   document.body
 );
-
-{
-  /* <select
-  onChange=${e => {
-    setInput(e.target.value);
-  }}
->
-  ${algs.map(
-    (move, i) =>
-      html`
-        <option value=${move.alg[0]}
-          >${move.name} :: ${move.alg[0].replace(/ /g, '')}</option
-        >
-      `
-  )}
-</select> */
-}

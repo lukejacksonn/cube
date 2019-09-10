@@ -10210,9 +10210,10 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
   ERNO.Cube.prototype = Object.create(ERNO.Group.prototype);
   ERNO.Cube.prototype.constructor = ERNO.Cube;
   ERNO.extend(ERNO.Cube.prototype, {
-    shuffle: function(amount, sequence) {
+    shuffle: function(sequence) {
       //	How many times should we shuffle?
-      amount = amount || 30;
+	//   amount = amount || 30;
+	amount = sequence.length
       //	Optional sequence of moves to execute instead of picking
       //	random moves from this.shuffleMethod.
       sequence = sequence || '';
@@ -10231,25 +10232,28 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
       //	Create some random rotations based on our shuffle method
       while (amount-- > 0) {
         if (sequence) {
-          move.set(sequence[sequenceIndex]);
+		  move = new ERNO.Twist();
+          move.set(sequence[amount]);
           sequenceIndex = (sequenceIndex + 1) % sequenceLength;
-        } else {
-          // Create a copy of all possible moves
-          allowedMoves = moves.split('');
-          move = new ERNO.Twist().copy(inverseOfLastMove);
+		}
+		
+		// else {
+        //   // Create a copy of all possible moves
+        //   allowedMoves = moves.split('');
+        //   move = new ERNO.Twist().copy(inverseOfLastMove);
 
-          //	We don't want to chose a move that reverses the last shuffle, it just looks odd,
-          //	so we should only select a move if it's a new one.
+        //   //	We don't want to chose a move that reverses the last shuffle, it just looks odd,
+        //   //	so we should only select a move if it's a new one.
 
-          while (move.equals(inverseOfLastMove)) {
-            move.set(
-              allowedMoves.splice(
-                Math.floor(Math.random() * allowedMoves.length),
-                1
-              )[0]
-            );
-          }
-        }
+        //   while (move.equals(inverseOfLastMove)) {
+        //     move.set(
+        //       allowedMoves.splice(
+        //         Math.floor(Math.random() * allowedMoves.length),
+        //         1
+        //       )[0]
+        //     );
+        //   }
+        // }
 
         //	If we flag this move as a shuffle, then we can remove it from the history
         //	once we've executed it.

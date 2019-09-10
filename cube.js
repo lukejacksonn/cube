@@ -54,7 +54,7 @@ const style = {
     }
   `,
   slider: css`
-    margin: 2rem 0 1rem;
+    margin: 1.62rem 0 1rem;
     max-width: 30rem;
     width: 90%;
   `
@@ -62,19 +62,28 @@ const style = {
 
 export default props => {
   const container = react.useRef(null);
-  const cube = (window.cube = react.useRef(new ERNO.Cube()));
+  const cube = react.useRef(new ERNO.Cube());
   const [speed, setSpeed] = react.useState(700);
 
   react.useEffect(() => {
-    container.current.appendChild(cube.current.domElement);
+    const hist = cube.current.twistQueue.history
+      .map(x =>
+        x.command === x.command.toLowerCase()
+          ? x.command.toUpperCase()
+          : x.command.toLowerCase()
+      )
+      .join('');
+
     cube.current.twistDuration = 0;
+    if (hist.length > 0) cube.current.shuffle(hist);
+    cube.current.twist(interpret(props.alg, true));
+  }, [props.alg]);
+
+  react.useEffect(() => {
+    container.current.appendChild(cube.current.domElement);
     cube.current.verbosity = 0;
     cube.current.autoRotate = false;
-    cube.current.twist(interpret(props.alg, true));
-    setTimeout(() => {
-      cube.current.twistDuration = 1000 - speed;
-    }, 1000);
-  }, [container]);
+  }, []);
 
   return html`
     <div
@@ -89,7 +98,10 @@ export default props => {
       <div className=${style.canvas} ref=${container}></div>
       <h1
         className=${style.alg}
-        onClick=${e => cube.current.twist(interpret(props.alg))}
+        onClick=${e => {
+          cube.current.twistDuration = speed;
+          cube.current.twist(interpret(props.alg));
+        }}
       >
         ${props.alg}
       </h1>
