@@ -29,7 +29,7 @@ const style = {
     }
   `,
   alg: css`
-    font-size: calc(14px + 3vmin);
+    font-size: calc(14px + 2vmin);
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 0 2rem;
@@ -41,12 +41,16 @@ const style = {
 
     button {
       font-size: calc(10px + 1vmin);
-
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
       background: #121212;
       padding: 1vmin 2vmin;
+      color: rgba(255, 255, 255, 0.62);
+      font-weight: lighter;
       svg {
-        width: calc(16px + 2vmin);
-        height: calc(16px + 2vmin);
+        width: calc(24px + 2vmin);
+        height: calc(24px + 2vmin);
+        fill: currentColor;
       }
     }
     button + button {
@@ -54,7 +58,7 @@ const style = {
     }
   `,
   slider: css`
-    margin: 1.62rem 0 1rem;
+    margin: 1.62rem 0 1.38rem;
     max-width: 30rem;
     width: 90%;
   `
@@ -64,6 +68,9 @@ export default props => {
   const container = react.useRef(null);
   const cube = react.useRef(new ERNO.Cube());
   const [speed, setSpeed] = react.useState(700);
+
+  const centerCube = () =>
+    cube.current.rotation.set((30 * Math.PI) / 180, (-40 * Math.PI) / 180, 0);
 
   react.useEffect(() => {
     const hist = cube.current.twistQueue.history
@@ -86,15 +93,7 @@ export default props => {
   }, []);
 
   return html`
-    <div
-      className=${style.container}
-      onDoubleClick=${() =>
-        cube.current.rotation.set(
-          (30 * Math.PI) / 180,
-          (-40 * Math.PI) / 180,
-          0
-        )}
-    >
+    <div className=${style.container} onDoubleClick=${centerCube}>
       <div className=${style.canvas} ref=${container}></div>
       <h1
         className=${style.alg}
@@ -119,8 +118,34 @@ export default props => {
         }}
       />
       <div className=${style.controls}>
-        <button onClick=${e => cube.current.twist(interpret(props.alg, true))}>
-          Reverse Sequence
+        <button
+          onClick=${e => {
+            cube.current.twistDuration = speed;
+            cube.current.twist(interpret(props.alg, true));
+          }}
+        >
+          Reverse
+        </button>
+        <button onClick=${centerCube}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path
+              d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+            />
+          </svg>
+        </button>
+        <button
+          onClick=${e => {
+            cube.current.twistDuration = speed;
+            cube.current.twist(interpret(props.alg));
+          }}
+        >
+          Execute
         </button>
       </div>
     </div>

@@ -17,7 +17,7 @@ const Form = () => {
   const [stage, setStage] = react.useState(location.pathname.slice(1));
   const [i, setI] = react.useState(parseInt(location.search.slice(1)));
 
-  const cases = algs[stage];
+  const cases = [...algs.pll, ...algs.oll];
   let a = cases[i || 0].alg[0];
 
   return html`
@@ -40,28 +40,6 @@ const Form = () => {
         }
       `}
     >
-      <div
-        className=${css`
-          display: flex;
-          > * {
-            flex: 1 1 100%;
-            text-align: center;
-            color: #fff;
-            background: #333;
-            padding: 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-          }
-          > * + * {
-            border-left: 1px solid #222;
-          }
-        `}
-      >
-        <button onClick=${e => setStage('f2l')}>f2l</button>
-        <button onClick=${e => setStage('oll')}>oll</button>
-        <button onClick=${e => setStage('pll')}>pll</button>
-      </div>
       <div
         className=${css`
           display: grid;
@@ -94,6 +72,11 @@ const Form = () => {
               onClick=${e => {
                 e.preventDefault();
                 setI(i);
+                window.scroll({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth'
+                });
               }}
             >
               <img id=${move.name} src=${imageForCase(move.alg[0])} />
