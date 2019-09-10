@@ -9858,7 +9858,7 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
 
     //	To display our cube, we'll need some 3D specific attributes, like a camera
 
-    var FIELD_OF_VIEW = 35,
+    var FIELD_OF_VIEW = 30,
       WIDTH = window.innerWidth,
       HEIGHT = window.innerHeight,
       ASPECT_RATIO = WIDTH / HEIGHT,
@@ -9885,7 +9885,7 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
     this.matrix = this.object3D.matrix;
     this.matrixWorld = this.object3D.matrixWorld;
 
-    this.rotation.set((25 * Math.PI) / 180, (-30 * Math.PI) / 180, 0);
+    this.rotation.set((30 * Math.PI) / 180, (-40 * Math.PI) / 180, 0);
 
     //  If we enable Auto-Rotate then the cube will spin (not twist!) in space
     //  by adding the following values to the Three object on each frame.
@@ -10333,7 +10333,6 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
       }
 
       //	Boom! Rotate a slice
-
       new TWEEN.Tween(slice)
         .to(
           {
@@ -10360,7 +10359,6 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
 
             if (rotation !== 0) {
               slice.rotateGroupMappingOnAxis(radians);
-
               // Also, since everythings changed, we might aswell tell everyone
               this.dispatchEvent(
                 new CustomEvent('onTwistComplete', {
@@ -10375,7 +10373,6 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
             //	If we're on the final twist of a shuffle
             if (twist === this.finalShuffle) {
               this.finalShuffle = null;
-
               this.dispatchEvent(
                 new CustomEvent('onShuffleComplete', {
                   detail: {
@@ -10440,12 +10437,7 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
 
         //	Kick off the next animation frame
 
-        var localTime =
-          typeof window !== 'undefined' &&
-          window.performance !== undefined &&
-          window.performance.now !== undefined
-            ? window.performance.now()
-            : Date.now();
+        var localTime = Date.now();
         var frameDelta = localTime - (time || localTime);
         time = localTime;
 
@@ -10622,7 +10614,4 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
   };
 
   window.ERNO = ERNO;
-  window._ = _;
-  window.TWEEN = window.TWEEN || TWEEN;
-  window.THREE = window.THREE || THREE;
 })();

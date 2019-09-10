@@ -31,12 +31,14 @@ export const translations = {
   L2: 'LL',
   "L'": 'l',
   l: 'ML',
+  l2: 'MLML',
   "l'": 'ml',
   // Right
   R: 'R',
   R2: 'RR',
   "R'": 'r',
   r: 'mR',
+  r2: 'mRmR',
   "r'": 'Mr',
   // Middle
   M: 'M',
@@ -59,17 +61,22 @@ export const translations = {
   "z'": 'z'
 };
 
+export const invert = str =>
+  [...str]
+    .reverse()
+    .map(c => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
+    .join('');
+
 export const interpret = (input, reverse) => {
-  const out = input
+  let out = input
     .replace(/[()]/g, '')
     .split(' ')
     .map(move => translations[move])
     .join('');
 
-  return !reverse
-    ? out
-    : [...out]
-        .reverse()
-        .map(c => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
-        .join('');
+  console.log(input);
+  if (input.startsWith("x' ")) out = out + 'X';
+  if (input.startsWith('x ')) out = out + 'x';
+
+  return !reverse ? out : invert(out);
 };
