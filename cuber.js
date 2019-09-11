@@ -9885,7 +9885,7 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
     this.matrix = this.object3D.matrix;
     this.matrixWorld = this.object3D.matrixWorld;
 
-    this.rotation.set((30 * Math.PI) / 180, (-40 * Math.PI) / 180, 0);
+    this.rotation.set((30 * Math.PI) / 180, (-45 * Math.PI) / 180, 0);
 
     //  If we enable Auto-Rotate then the cube will spin (not twist!) in space
     //  by adding the following values to the Three object on each frame.

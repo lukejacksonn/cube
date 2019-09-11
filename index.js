@@ -18,10 +18,10 @@ const Form = () => {
   const [i, setI] = react.useState(parseInt(location.search.slice(1)));
 
   const cases = [...algs.pll, ...algs.oll];
-  let a = cases[i || 0].alg[0];
+  let a = cases[i || 0];
 
   return html`
-    <${Cube} key="cube" alg=${a} />
+    <${Cube} key="cube" alg=${a.alg[0]} group=${a.group} />
     <nav
       className=${css`
         @media (orientation: landscape) {
@@ -55,13 +55,17 @@ const Form = () => {
             left: 0;
             width: 100%;
             opacity: 0.62;
+            transition: transform 0.2s;
             &:hover {
               opacity: 1;
-              transform: scale(1.1);
+              transform: scale(1.062);
             }
           }
-          h1 {
-            color: #666;
+          p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            color: #555;
           }
         `}
       >
@@ -80,7 +84,7 @@ const Form = () => {
               }}
             >
               <img id=${move.name} src=${imageForCase(move.alg[0])} />
-              <h1>${move.name}</h1>
+              <p>${move.name}</p>
             </a>
           `
         )}

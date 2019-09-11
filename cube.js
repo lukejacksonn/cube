@@ -35,6 +35,7 @@ const style = {
     padding: 0 2rem;
     line-height: 162%;
     cursor: pointer;
+    margin-bottom: 1rem;
   `,
   controls: css`
     display: flex;
@@ -45,8 +46,8 @@ const style = {
       letter-spacing: 0.2em;
       background: #121212;
       padding: 1vmin 2vmin;
-      color: rgba(255, 255, 255, 0.62);
-      font-weight: lighter;
+      color: rgba(255, 255, 255, 0.38);
+      font-weight: bold;
       svg {
         width: calc(24px + 2vmin);
         height: calc(24px + 2vmin);
@@ -58,9 +59,14 @@ const style = {
     }
   `,
   slider: css`
-    margin: 2rem 0 1.62rem;
+    margin: 1rem 0rem 1rem;
     max-width: 40rem;
     width: 90%;
+  `,
+  group: css`
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   `
 };
 
@@ -70,7 +76,7 @@ export default props => {
   const [speed, setSpeed] = react.useState(700);
 
   const centerCube = () =>
-    cube.current.rotation.set((30 * Math.PI) / 180, (-40 * Math.PI) / 180, 0);
+    cube.current.rotation.set((30 * Math.PI) / 180, (-45 * Math.PI) / 180, 0);
 
   react.useEffect(() => {
     const hist = cube.current.twistQueue.history
@@ -104,6 +110,7 @@ export default props => {
       >
         ${props.alg}
       </h1>
+      <p className=${style.group}>${props.group}</p>
       <input
         className=${style.slider}
         key="speed"

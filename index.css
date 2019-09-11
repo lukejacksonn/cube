@@ -90,11 +90,11 @@ input[type='range']::-webkit-slider-thumb {
   height: 36px;
   width: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: #111;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -12px;
 }
 input[type='range']:focus::-webkit-slider-runnable-track {
-  /* background: #444; */
+  background: #242424;
 }
