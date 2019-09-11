@@ -1,5 +1,5 @@
 import { react, html, css } from 'https://unpkg.com/rplus';
-import algs from './algorithms.js';
+import cases from './algorithms.js';
 import Cube from './cube.js';
 import { invert } from './utils.js';
 
@@ -17,11 +17,10 @@ const Form = () => {
   const [stage, setStage] = react.useState(location.pathname.slice(1));
   const [i, setI] = react.useState(parseInt(location.search.slice(1)));
 
-  const cases = [...algs.pll, ...algs.oll];
   let a = cases[i || 0];
 
   return html`
-    <${Cube} key="cube" alg=${a.alg[0]} group=${a.group} />
+    <${Cube} key="cube" alg=${a.algs[0]} group=${a.group} />
     <nav
       className=${css`
         @media (orientation: landscape) {
@@ -48,13 +47,17 @@ const Form = () => {
           > a {
             width: 100%;
             padding-top: 100%;
+            &[data-active='true'] > img {
+              opacity: 1;
+              transform: scale(1);
+            }
           }
           img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            opacity: 0.62;
+            opacity: 0.5;
             transition: transform 0.2s;
             &:hover {
               opacity: 1;
@@ -70,12 +73,13 @@ const Form = () => {
         `}
       >
         ${cases.map(
-          (move, i) => html`
+          (move, index) => html`
             <a
-              key=${move.alg[0]}
+              data-active=${i == index}
+              key=${move.algs[0]}
               onClick=${e => {
                 e.preventDefault();
-                setI(i);
+                setI(index);
                 window.scroll({
                   top: 0,
                   left: 0,
@@ -83,7 +87,7 @@ const Form = () => {
                 });
               }}
             >
-              <img id=${move.name} src=${imageForCase(move.alg[0])} />
+              <img id=${move.name} src=${imageForCase(move.algs[0])} />
               <p>${move.name}</p>
             </a>
           `
@@ -99,3 +103,21 @@ react.render(
   `,
   document.body
 );
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(
+      function(registration) {
+        // Registration was successful
+        console.log(
+          'ServiceWorker registration successful with scope: ',
+          registration.scope
+        );
+      },
+      function(err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      }
+    );
+  });
+}
