@@ -29,25 +29,25 @@ export default [
   {
     name: 5,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: ["U' (R U' R' U) y' (R' U' R)", "y' U (R' U' R U') (R' U' R)"]
   },
   {
     name: 6,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: ["U' (R U R' U) (R U R')"]
   },
   {
     name: 7,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: ["U' (R U2' R' U) y' (R' U' R)", "U' (R U2' R') d (R' U' R)"]
   },
   {
     name: 8,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: [
       "R' U2' R2 U R2' U R",
       "y' U (R' U2 R) U' y (R U R')",
@@ -57,40 +57,40 @@ export default [
   {
     name: 9,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: ["y' U (R' U R U') (R' U' R)"]
   },
   {
     name: 10,
     type: 'f2l',
-    group: 'Different On Top',
+    group: 'Different Facing Up',
     algs: ["U' (R U' R' U) (R U R')"]
   },
   {
     name: 11,
     type: 'f2l',
-    group: 'Same On Top',
+    group: 'Same Facing Up',
     algs: ["(U' R U R') U2 (R U' R')"]
   },
 
   {
     name: 12,
     type: 'f2l',
-    group: 'Same On Top',
+    group: 'Same Facing Up',
     algs: ["y' (U R' U' R) U2' (R' U R) ", " d (R' U' R) U2' (R' U R)"]
   },
 
   {
     name: 13,
     type: 'f2l',
-    group: 'Same On Top',
+    group: 'Same Facing Up',
     algs: ["U' (R U2' R') U2 (R U' R')"]
   },
 
   {
     name: 14,
     type: 'f2l',
-    group: 'Same On Top',
+    group: 'Same Facing Up',
     algs: ["y' U (R' U2 R) U2' (R' U R) ", " d (R' U2 R) U2' (R' U R)"]
   },
   {

@@ -55,8 +55,8 @@ const style = {
       width: 100%;
       padding-top: 100%;
       &[data-active='true'] > img {
-        opacity: 0.2;
-        transform: scale(1);
+        opacity: 0.3;
+        transform: scale(0.9);
       }
     }
     img {
@@ -65,10 +65,10 @@ const style = {
       left: 0;
       width: 100%;
       opacity: 0.8;
-      transition: transform 0.2s, opacity 0.2s;
+      transition: transform 0.2s, opacity 0.3s;
       &:hover {
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.038);
       }
     }
     p {

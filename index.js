@@ -1,23 +1,24 @@
 import { react, html, css } from 'https://unpkg.com/rplus';
 import cases from './algorithms.js';
+
 import Cube from './cube.js';
 import Nav from './nav.js';
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-const Form = () => {
+const App = () => {
   const [route, go] = react.useState(parseInt(location.search.slice(1)));
-  let current = cases[route || 0];
+  let current = cases[route];
   return html`
-    <${Cube} key="cube" alg=${current.algs[0]} group=${current.group} />
+    <${Cube} key="cube" case=${current} />
     <${Nav} go=${go} route=${route} links=${cases} />
   `;
 };
 
 react.render(
   html`
-    <${Form} />
+    <${App} />
   `,
   document.body
 );
