@@ -1,6 +1,6 @@
 const CACHE_NAME = 'cuberider';
 self.addEventListener('fetch', function(event) {
-  if (event.request.url.startsWith('https://cube.crider.co.uk')) {
+  if (event.request.url.startsWith('http://cube.crider.co.uk')) {
     event.respondWith(
       caches.match(event.request).then(function(response) {
         // Cache hit - return response

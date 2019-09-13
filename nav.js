@@ -4,7 +4,7 @@ const imageForCase = alg => {
   let x = alg.replace(/ /g, '');
   if (alg.startsWith("x' ")) x = x + ' x';
   if (alg.startsWith('x ')) x = x + " x'";
-  return `https://cube.crider.co.uk/visualcube.php?fmt=png&size=300&bg=t&sch=fdcc0a,dc422f,3d80f6,ffffff,ff6c00,009d53&case=${x}`;
+  return `http://cube.crider.co.uk/visualcube.php?fmt=png&size=300&bg=t&sch=fdcc0a,dc422f,3d80f6,ffffff,ff6c00,009d53&case=${x}`;
 };
 
 const item = (route, go, filterType) => (move, index) => html`
