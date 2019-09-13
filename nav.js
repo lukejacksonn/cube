@@ -47,7 +47,7 @@ const style = {
     }
     background: #222;
     height: 100vh;
-    padding: 3rem;
+    padding: 5vmin;
     > * + * {
       margin-top: 2rem;
     }
@@ -65,7 +65,7 @@ const style = {
     }
     button {
       flex: 1 1 100%;
-      padding: 1.62rem 0;
+      padding: 1rem 0;
       text-transform: uppercase;
       font-weight: bold;
     }

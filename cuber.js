@@ -10178,7 +10178,7 @@ THREE.RGBA_PVRTC_2BPPV1_Format = 2103;
 
     // 	Define a default size for our cube, this will be resized to 100%
     //	of it's containing dom element during the render.
-    this.setSize(400, 200);
+    this.setSize(200, 200);
 
     //  Get ready for major loop-age.
     //  Our Cube checks these booleans at 60fps.

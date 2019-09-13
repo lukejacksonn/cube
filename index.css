@@ -22,7 +22,7 @@ body {
   padding: 0px;
   background: #222;
   display: grid;
-  grid-template-columns: 70fr 30fr;
+  grid-template-columns: 65fr 35fr;
   width: 100%;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
