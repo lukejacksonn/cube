@@ -112,7 +112,9 @@ const style = {
     transform: translateY(-5%);
     animation: bob 3s infinite;
     &:only-child {
-      height: calc(var(--vh, 1vh) * 62);
+      width: 100%;
+      height: calc(var(--vh, 1vh) * 100);
+      animation: none;
     }
     @keyframes bob {
       from: {
