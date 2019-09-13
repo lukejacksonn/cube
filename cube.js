@@ -107,14 +107,14 @@ const style = {
     background: radial-gradient(#222, #111);
   `,
   canvas: css`
+    width: calc(var(--vh, 1vh) * 50);
     height: calc(var(--vh, 1vh) * 50);
-    max-height: 90vw;
     transform: translateY(-5%);
     animation: bob 3s infinite;
     &:only-child {
       transform: translateY(0%);
-      width: 80%;
-      height: 80%;
+      height: 80vmin;
+      width: 80vmin;
       animation: none;
     }
     @keyframes bob {
