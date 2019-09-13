@@ -107,7 +107,7 @@ const style = {
     background: radial-gradient(#222, #111);
   `,
   canvas: css`
-    height: calc(var(--vh, 1vh) * 62);
+    height: calc(var(--vh, 1vh) * 50);
     max-height: 90vw;
     transform: translateY(-5%);
     animation: bob 3s infinite;
