@@ -67,13 +67,13 @@ export const translations = {
   y: 'Y',
   "y'": 'y',
   z: 'Z',
-  "z'": 'z'
+  "z'": 'z',
 };
 
-export const invert = str =>
+export const invert = (str) =>
   [...str]
     .reverse()
-    .map(c => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
+    .map((c) => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
     .join('');
 
 export const interpret = (input, reverse) => {
@@ -81,7 +81,7 @@ export const interpret = (input, reverse) => {
     .replace(/\(/g, '')
     .replace(/\)/g, '')
     .split(' ')
-    .map(move => translations[move])
+    .map((move) => translations[move])
     .join('');
 
   console.log(out);
@@ -90,3 +90,16 @@ export const interpret = (input, reverse) => {
 
   return !reverse ? out : invert(out);
 };
+
+import { h, render } from 'https://cdn.skypack.dev/preact';
+import {
+  useEffect,
+  useState,
+  useRef,
+} from 'https://cdn.skypack.dev/preact/hooks';
+import htm from 'https://cdn.skypack.dev/htm';
+import { css } from 'https://cdn.skypack.dev/goober';
+
+const html = htm.bind(h);
+
+export { useEffect, useState, useRef, html, css, render };

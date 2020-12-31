@@ -1,6 +1,6 @@
-import { react, html, css } from 'https://unpkg.com/rplus';
+import { useState, html, css } from './utils.js';
 
-const imageForCase = alg => {
+const imageForCase = (alg) => {
   let x = alg.replace(/ /g, '');
   if (alg.startsWith("x' ")) x = x + ' x';
   if (alg.startsWith('x ')) x = x + " x'";
@@ -12,7 +12,7 @@ const item = (route, go, filterType) => (move, index) => html`
     data-hidden=${filterType === '' ? false : move.type !== filterType}
     data-active=${route == index}
     key=${move.algs[0]}
-    onClick=${e => {
+    onClick=${(e) => {
       e.preventDefault();
       go(index);
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -23,15 +23,15 @@ const item = (route, go, filterType) => (move, index) => html`
   </a>
 `;
 
-export default props => {
-  const [filterType, setFilterType] = react.useState('');
+export default (props) => {
+  const [filterType, setFilterType] = useState('');
   console.log(filterType);
   return html`
     <nav className=${style.nav}>
       <div className=${style.filters}>
-        <button onClick=${e => setFilterType('f2l')}>f2l</button>
-        <button onClick=${e => setFilterType('oll')}>oll</button>
-        <button onClick=${e => setFilterType('pll')}>pll</button>
+        <button onClick=${(e) => setFilterType('f2l')}>f2l</button>
+        <button onClick=${(e) => setFilterType('oll')}>oll</button>
+        <button onClick=${(e) => setFilterType('pll')}>pll</button>
       </div>
       <div className=${style.links}>
         ${props.links.map(item(props.route, props.go, filterType))}
@@ -103,5 +103,5 @@ const style = {
       left: 0;
       color: #555;
     }
-  `
+  `,
 };

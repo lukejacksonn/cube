@@ -1,4 +1,5 @@
-import { react, html, css } from 'https://unpkg.com/rplus';
+import { html, useState, render } from './utils.js';
+
 import cases from './algorithms.js';
 
 import Cube from './cube.js';
@@ -8,7 +9,7 @@ let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 const App = () => {
-  const [route, go] = react.useState(parseInt(location.search.slice(1)));
+  const [route, go] = useState(parseInt(location.search.slice(1)));
   let current = cases[route];
   return html`
     <${Cube} key="cube" case=${current} />
@@ -16,24 +17,19 @@ const App = () => {
   `;
 };
 
-react.render(
-  html`
-    <${App} />
-  `,
-  document.body
-);
+render(html` <${App} /> `, document.body);
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     navigator.serviceWorker.register('/sw.js').then(
-      function(registration) {
+      function (registration) {
         // Registration was successful
         console.log(
           'ServiceWorker registration successful with scope: ',
           registration.scope
         );
       },
-      function(err) {
+      function (err) {
         // registration failed :(
         console.log('ServiceWorker registration failed: ', err);
       }
