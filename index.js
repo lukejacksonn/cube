@@ -1,9 +1,9 @@
-import { html, useState, render } from './utils.js';
+import { html, useState, render } from './src/utils.js';
 
-import cases from './algorithms.js';
+import cases from './src/algorithms.js';
 
-import Cube from './cube.js';
-import Nav from './nav.js';
+import Cube from './src/cube.js';
+import Nav from './src/nav.js';
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
