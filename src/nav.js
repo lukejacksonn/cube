@@ -1,37 +1,35 @@
-import { useState, html, css } from './utils.js';
+import { useState, html, css } from "./utils.js";
 
-const imageForCase = (alg) => {
-  let x = alg.replace(/ /g, '');
-  if (alg.startsWith("x' ")) x = x + ' x';
-  if (alg.startsWith('x ')) x = x + " x'";
-  return `http://cube.crider.co.uk/visualcube.php?fmt=png&size=300&bg=t&sch=fdcc0a,dc422f,3d80f6,ffffff,ff6c00,009d53&case=${x}`;
-};
-
-const item = (route, go, filterType) => (move, index) => html`
-  <a
-    data-hidden=${filterType === '' ? false : move.type !== filterType}
-    data-active=${route == index}
-    key=${move.algs[0]}
-    onClick=${(e) => {
-      e.preventDefault();
-      go(index);
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-    }}
-  >
-    <img id=${move.name} src=${imageForCase(move.algs[0])} />
-    <p>${move.name}</p>
-  </a>
-`;
+const item = (route, go, filterType) => (move, index) =>
+  html`
+    <a
+      data-hidden=${filterType === "" ? false : move.type !== filterType}
+      data-active=${route == index}
+      href="#${move.algs[0].replace(/ /g, "")}"
+      key=${move.algs[0]}
+      onClick=${(e) => {
+        e.preventDefault();
+        go(index);
+        window.scroll({ top: 0, left: 0, behavior: "smooth" });
+      }}
+    >
+      <img
+        id=${move.name}
+        src="images/${encodeURI(move.algs[0].replace(/ /g, ""))}.png"
+      />
+      <p>${move.name}</p>
+    </a>
+  `;
 
 export default (props) => {
-  const [filterType, setFilterType] = useState('');
+  const [filterType, setFilterType] = useState("");
   console.log(filterType);
   return html`
     <nav className=${style.nav}>
       <div className=${style.filters}>
-        <button onClick=${(e) => setFilterType('f2l')}>f2l</button>
-        <button onClick=${(e) => setFilterType('oll')}>oll</button>
-        <button onClick=${(e) => setFilterType('pll')}>pll</button>
+        <button onClick=${(e) => setFilterType("f2l")}>f2l</button>
+        <button onClick=${(e) => setFilterType("oll")}>oll</button>
+        <button onClick=${(e) => setFilterType("pll")}>pll</button>
       </div>
       <div className=${style.links}>
         ${props.links.map(item(props.route, props.go, filterType))}
@@ -74,13 +72,13 @@ const style = {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     grid-gap: 0.62rem;
-    [data-hidden='true'] {
+    [data-hidden="true"] {
       display: none;
     }
     > a {
       width: 100%;
       padding-top: 100%;
-      &[data-active='true'] > img {
+      &[data-active="true"] > img {
         opacity: 0.3;
         transform: scale(0.9);
       }

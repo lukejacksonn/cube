@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, html, css } from './utils.js';
-import { interpret } from './utils.js';
+import { useState, useEffect, useRef, html, css } from "./utils.js";
+import { interpret } from "./utils.js";
 
 export default (props) => {
   const container = useRef(null);
@@ -17,7 +17,7 @@ export default (props) => {
             ? x.command.toUpperCase()
             : x.command.toLowerCase()
         )
-        .join('');
+        .join("");
 
       cube.current.twistDuration = 0;
       cube.current.autoRotate = false;
