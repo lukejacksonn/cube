@@ -11,7 +11,7 @@ const App = () => {
   let current = cases[route];
   return (
     <>
-      <Cube key="cube" case={current} />
+      <Cube case={current} />
       <Nav go={go} route={route} links={cases} />
     </>
   );
