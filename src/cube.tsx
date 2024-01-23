@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef, html, css } from "./utils.js";
-import { interpret } from "./utils.js";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { css, interpret } from "./utils";
+
+// import "./cuber";
 
 export default (props) => {
   const container = useRef(null);
@@ -33,68 +35,67 @@ export default (props) => {
     cube.current.autoRotate = !props.case;
   }, []);
 
-  return html`
-    <div className=${style.container} onDoubleClick=${centerCube}>
-      <div className=${style.canvas} ref=${container}></div>
-      ${props.case &&
-      html`
-        <h1
-          className=${style.alg}
-          onClick=${(e) => {
-            cube.current.twistDuration = speed;
-            cube.current.twist(interpret(props.case.algs[0]));
-          }}
-        >
-          ${props.case.algs[0]}
-        </h1>
-        <p className=${style.group}>${props.case.group}</p>
-        <input
-          className=${style.slider}
-          key="speed"
-          type="range"
-          defaultValue=${speed}
-          step="100"
-          min="0"
-          max="900"
-          onChange=${(e) => {
-            cube.current.twistDuration = 1000 - e.target.value;
-            setSpeed(1000 - e.target.value);
-          }}
-        />
-        <div className=${style.controls}>
-          <button
-            onClick=${(e) => {
-              cube.current.twistDuration = speed;
-              cube.current.twist(interpret(props.case.algs[0], true));
-            }}
-          >
-            Reverse
-          </button>
-          <button onClick=${centerCube}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path fill="none" d="M0 0h24v24H0V0z" />
-              <path
-                d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-              />
-            </svg>
-          </button>
-          <button
-            onClick=${(e) => {
+  return (
+    <div className={style.container} onDoubleClick={centerCube}>
+      <div className={style.canvas} ref={container}></div>
+      {props.case && (
+        <>
+          <h1
+            className={style.alg}
+            onClick={(e) => {
               cube.current.twistDuration = speed;
               cube.current.twist(interpret(props.case.algs[0]));
             }}
           >
-            Execute
-          </button>
-        </div>
-      `}
+            {props.case.algs[0]}
+          </h1>
+          <p className={style.group}>{props.case.group}</p>
+          <input
+            className={style.slider}
+            key="speed"
+            type="range"
+            defaultValue={speed}
+            step="100"
+            min="0"
+            max="900"
+            onChange={(e) => {
+              cube.current.twistDuration = 1000 - e.target.value;
+              setSpeed(1000 - e.target.value);
+            }}
+          />
+          <div className={style.controls}>
+            <button
+              onClick={(e) => {
+                cube.current.twistDuration = speed;
+                cube.current.twist(interpret(props.case.algs[0], true));
+              }}
+            >
+              Reverse
+            </button>
+            <button onClick={centerCube}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path d="M12 4C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+              </svg>
+            </button>
+            <button
+              onClick={(e) => {
+                cube.current.twistDuration = speed;
+                cube.current.twist(interpret(props.case.algs[0]));
+              }}
+            >
+              Execute
+            </button>
+          </div>
+        </>
+      )}
     </div>
-  `;
+  );
 };
 
 const style = {

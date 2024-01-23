@@ -1,6 +1,3 @@
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty("--vh", `${vh}px`);
-
 export const translations = {
   // Up
   U: "U",
@@ -90,15 +87,6 @@ export const interpret = (input, reverse) => {
   return !reverse ? out : invert(out);
 };
 
-import { h, render } from "https://cdn.skypack.dev/preact";
-import {
-  useEffect,
-  useState,
-  useRef,
-} from "https://cdn.skypack.dev/preact/hooks";
-import htm from "https://cdn.skypack.dev/htm";
 import { css } from "https://cdn.skypack.dev/goober";
 
-const html = htm.bind(h);
-
-export { useEffect, useState, useRef, html, css, render };
+export { css };
