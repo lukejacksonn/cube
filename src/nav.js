@@ -7,8 +7,7 @@ const item = (route, go, filterType) => (move, index) =>
       data-active=${route == index}
       href="#${move.algs[0].replace(/ /g, "")}"
       key=${move.algs[0]}
-      onClick=${(e) => {
-        e.preventDefault();
+      onClick=${() => {
         go(index);
         window.scroll({ top: 0, left: 0, behavior: "smooth" });
       }}
@@ -78,9 +77,11 @@ const style = {
     > a {
       width: 100%;
       padding-top: 100%;
-      &[data-active="true"] > img {
+      border-radius: 0.38rem;
+      overflow: hidden;
+      &[data-active="true"] {
         opacity: 0.3;
-        transform: scale(0.9);
+        transform: scale(0.95);
       }
     }
     img {
@@ -97,8 +98,8 @@ const style = {
     }
     p {
       position: absolute;
-      bottom: 0;
-      left: 0;
+      top: 0.38em;
+      left: 0.38em;
       color: #555;
     }
   `,
