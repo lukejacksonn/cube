@@ -1,37 +1,39 @@
+import { css } from "goober";
 import { useState } from "preact/hooks";
-import { css } from "./utils.js";
+import { Case } from "./algorithms";
 
-const item = (route, go, filterType) => (move, index) =>
-  (
-    <a
-      data-hidden={filterType === "" ? false : move.type !== filterType}
-      data-active={route == index}
-      href={`#${move.algs[0].replace(/ /g, "")}`}
-      key={move.algs[0]}
-      onClick={() => {
-        go(index);
-        window.scroll({ top: 0, left: 0, behavior: "smooth" });
-      }}
-    >
-      <img
-        id={move.name}
-        src={`images/${encodeURI(move.algs[0].replace(/ /g, ""))}.png`}
-      />
-      <p>{move.name}</p>
-    </a>
-  );
-
-export default (props) => {
+export default (props: {
+  route: string;
+  go: (x: string) => void;
+  cases: Case[];
+}) => {
   const [filterType, setFilterType] = useState("");
   return (
     <nav className={style.nav}>
       <div className={style.filters}>
-        <button onClick={(e) => setFilterType("f2l")}>f2l</button>
-        <button onClick={(e) => setFilterType("oll")}>oll</button>
-        <button onClick={(e) => setFilterType("pll")}>pll</button>
+        <button onClick={() => setFilterType("f2l")}>f2l</button>
+        <button onClick={() => setFilterType("oll")}>oll</button>
+        <button onClick={() => setFilterType("pll")}>pll</button>
       </div>
       <div className={style.links}>
-        {props.links.map(item(props.route, props.go, filterType))}
+        {props.cases.map((c) => (
+          <a
+            data-hidden={filterType === "" ? false : c.type !== filterType}
+            data-active={props.route == c.moves[0].replace(/ /g, "")}
+            href={`#${c.moves[0].replace(/ /g, "")}`}
+            key={c.moves[0]}
+            onClick={() => {
+              props.go(c.moves[0].replace(/ /g, ""));
+              window.scroll({ top: 0, left: 0, behavior: "smooth" });
+            }}
+          >
+            <img
+              id={c.name + ""}
+              src={`images/${encodeURI(c.moves[0].replace(/ /g, ""))}.png`}
+            />
+            <p>{c.name}</p>
+          </a>
+        ))}
       </div>
     </nav>
   );

@@ -1,12 +1,18 @@
+import { css } from "goober";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { css, interpret } from "./utils";
+import { interpret } from "./utils";
+import { Case } from "./algorithms";
 
-// import "./cuber";
+declare global {
+  interface Window {
+    ERNO: any;
+  }
+}
 
-export default (props) => {
-  const container = useRef(null);
-  const cube = useRef(new ERNO.Cube());
-  const [speed, setSpeed] = useState(700);
+export default (props: { case: Case | undefined }) => {
+  const container = useRef<HTMLDivElement>(null);
+  const cube = useRef(new window.ERNO.Cube());
+  const [speed, setSpeed] = useState<number>(700);
 
   const centerCube = () =>
     cube.current.rotation.set((30 * Math.PI) / 180, (-45 * Math.PI) / 180, 0);
@@ -14,7 +20,7 @@ export default (props) => {
   useEffect(() => {
     if (props.case) {
       const hist = cube.current.twistQueue.history
-        .map((x) =>
+        .map((x: { command: string }) =>
           x.command === x.command.toLowerCase()
             ? x.command.toUpperCase()
             : x.command.toLowerCase()
@@ -25,18 +31,19 @@ export default (props) => {
       cube.current.autoRotate = false;
       centerCube();
       if (hist.length > 0) cube.current.shuffle(hist);
-      cube.current.twist(interpret(props.case.algs[0], true));
+      cube.current.twist(interpret(props.case.moves[0], true));
     }
   }, [props.case]);
 
   useEffect(() => {
+    if (!container.current) return;
     container.current.appendChild(cube.current.domElement);
     cube.current.verbosity = 0;
     cube.current.autoRotate = !props.case;
   }, []);
 
   return (
-    <div className={style.container} onDoubleClick={centerCube}>
+    <div className={style.container} onDblClick={centerCube}>
       <div className={style.canvas} ref={container}></div>
       {props.case && (
         <>
@@ -44,30 +51,34 @@ export default (props) => {
             className={style.alg}
             onClick={(e) => {
               cube.current.twistDuration = speed;
-              cube.current.twist(interpret(props.case.algs[0]));
+              if (!props.case) return;
+              cube.current.twist(interpret(props.case.moves[0]));
             }}
           >
-            {props.case.algs[0]}
+            {props.case.moves[0]}
           </h1>
           <p className={style.group}>{props.case.group}</p>
           <input
             className={style.slider}
             key="speed"
             type="range"
-            defaultValue={speed}
+            defaultValue={speed + ""}
             step="100"
             min="0"
             max="900"
             onChange={(e) => {
-              cube.current.twistDuration = 1000 - e.target.value;
-              setSpeed(1000 - e.target.value);
+              const target = e.target as HTMLInputElement;
+              const value = 1000 - parseInt(target.value);
+              cube.current.twistDuration = value;
+              setSpeed(value);
             }}
           />
           <div className={style.controls}>
             <button
               onClick={(e) => {
                 cube.current.twistDuration = speed;
-                cube.current.twist(interpret(props.case.algs[0], true));
+                if (!props.case) return;
+                cube.current.twist(interpret(props.case.moves[0], true));
               }}
             >
               Reverse
@@ -86,7 +97,8 @@ export default (props) => {
             <button
               onClick={(e) => {
                 cube.current.twistDuration = speed;
-                cube.current.twist(interpret(props.case.algs[0]));
+                if (!props.case) return;
+                cube.current.twist(interpret(props.case.moves[0]));
               }}
             >
               Execute

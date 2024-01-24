@@ -1,18 +1,18 @@
 import { render } from "preact";
 import { useState } from "preact/hooks";
 
-import cases from "./src/algorithms";
+import { cases } from "./src/algorithms";
 
 import Cube from "./src/cube";
 import Nav from "./src/nav";
 
 const App = () => {
-  const [route, go] = useState(parseInt(location.search.slice(1)));
-  let current = cases[route];
+  const [route, go] = useState(location.hash.slice(1));
+  let current = cases.find((x) => x.moves[0].replace(/ /g, "") === route);
   return (
     <>
       <Cube case={current} />
-      <Nav go={go} route={route} links={cases} />
+      <Nav go={go} route={route} cases={cases} />
     </>
   );
 };

@@ -1,4 +1,8 @@
-export const translations = {
+type Translations = {
+  [key: string]: string;
+};
+
+export const translations: Translations = {
   // Up
   U: "U",
   U2: "UU",
@@ -67,26 +71,22 @@ export const translations = {
   "z'": "z",
 };
 
-export const invert = (str) =>
-  [...str]
+export const invert = (move: string) =>
+  [...move]
     .reverse()
     .map((c) => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
     .join("");
 
-export const interpret = (input, reverse) => {
-  let out = input
+export const interpret = (move: string, reverse?: boolean) => {
+  let out = move
     .replace(/\(/g, "")
     .replace(/\)/g, "")
     .split(" ")
     .map((move) => translations[move])
     .join("");
 
-  if (input.startsWith("x' ")) out = out + "X";
-  if (input.startsWith("x ")) out = out + "x";
+  if (move.startsWith("x' ")) out = out + "X";
+  if (move.startsWith("x ")) out = out + "x";
 
   return !reverse ? out : invert(out);
 };
-
-import { css } from "https://cdn.skypack.dev/goober";
-
-export { css };
