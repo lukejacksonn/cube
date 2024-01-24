@@ -29,7 +29,7 @@ export default (props: {
           >
             <img
               id={c.name + ""}
-              src={`images/${encodeURI(c.moves[0].replace(/ /g, ""))}.png`}
+              src={`images/${c.moves[0].replace(/ /g, "")}-cube.png`}
             />
             <p>{c.name}</p>
           </a>
