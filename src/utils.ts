@@ -90,3 +90,20 @@ export const interpret = (move: string, reverse?: boolean) => {
 
   return !reverse ? out : invert(out);
 };
+
+export const hash = (inputString) => {
+  let hash = "";
+
+  for (let i = 0; i < inputString.length; i++) {
+    const charCode = inputString.charCodeAt(i);
+    const validCharCode = charCode % 36;
+    const alphanumericChar =
+      validCharCode < 10
+        ? String(validCharCode)
+        : String.fromCharCode(validCharCode + 87);
+
+    hash += alphanumericChar;
+  }
+
+  return hash;
+};

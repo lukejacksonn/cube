@@ -1,6 +1,7 @@
 import { css } from "goober";
 import { useState } from "preact/hooks";
 import { Case } from "./algorithms";
+import { hash } from "./utils";
 
 export default (props: {
   route: string;
@@ -27,10 +28,7 @@ export default (props: {
               window.scroll({ top: 0, left: 0, behavior: "smooth" });
             }}
           >
-            <img
-              id={c.name + ""}
-              src={`images/${c.moves[0].replace(/ /g, "")}-cube.png`}
-            />
+            <img id={c.name + ""} src={`images/${hash(c.moves[0])}.png`} />
             <p>{c.name}</p>
           </a>
         ))}
