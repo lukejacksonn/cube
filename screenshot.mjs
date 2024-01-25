@@ -1,10 +1,10 @@
 import puppeteer from "puppeteer";
 
-const hash = (inputString) => {
+const hash = (str) => {
   let hash = "";
 
-  for (let i = 0; i < inputString.length; i++) {
-    const charCode = inputString.charCodeAt(i);
+  for (let i = 0; i < str.length; i++) {
+    const charCode = str.charCodeAt(i);
     const validCharCode = charCode % 36;
     const alphanumericChar =
       validCharCode < 10
@@ -44,11 +44,11 @@ for (const move of moves) {
   const el = await page.$(`nav div:last-child a:nth-child(${i})`);
   const cube = await page.waitForSelector(".cube");
 
-  await el.click();
+  await el?.click();
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   const name = await page.$eval("h1", (el) => el.textContent);
-  await cube.screenshot({ path: `public/images/${hash(name)}.png` });
+  await cube?.screenshot({ path: `public/images/${hash(name)}.png` });
 
   await page.close();
 

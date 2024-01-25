@@ -91,11 +91,11 @@ export const interpret = (move: string, reverse?: boolean) => {
   return !reverse ? out : invert(out);
 };
 
-export const hash = (inputString) => {
+export const hash = (str: string) => {
   let hash = "";
 
-  for (let i = 0; i < inputString.length; i++) {
-    const charCode = inputString.charCodeAt(i);
+  for (let i = 0; i < str.length; i++) {
+    const charCode = str.charCodeAt(i);
     const validCharCode = charCode % 36;
     const alphanumericChar =
       validCharCode < 10
