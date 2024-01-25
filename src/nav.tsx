@@ -12,9 +12,24 @@ export default (props: {
   return (
     <nav className={style.nav}>
       <div className={style.filters}>
-        <button onClick={() => setFilterType("f2l")}>f2l</button>
-        <button onClick={() => setFilterType("oll")}>oll</button>
-        <button onClick={() => setFilterType("pll")}>pll</button>
+        <button
+          data-active={filterType === "f2l"}
+          onClick={() => setFilterType("f2l")}
+        >
+          f2l
+        </button>
+        <button
+          data-active={filterType === "oll"}
+          onClick={() => setFilterType("oll")}
+        >
+          oll
+        </button>
+        <button
+          data-active={filterType === "pll"}
+          onClick={() => setFilterType("pll")}
+        >
+          pll
+        </button>
       </div>
       <div className={style.links}>
         {props.cases.map((c) => (
@@ -25,7 +40,7 @@ export default (props: {
             key={c.moves[0]}
             onClick={() => {
               props.go(c.moves[0].replace(/ /g, ""));
-              window.scroll({ top: 0, left: 0, behavior: "smooth" });
+              document.body.scroll({ top: 0, left: 0, behavior: "smooth" });
             }}
           >
             <img id={c.name + ""} src={`images/${hash(c.moves[0])}.png`} />
@@ -44,7 +59,7 @@ const style = {
     }
     background: #222;
     height: 100vh;
-    padding: 5vmin;
+    padding: 1.62rem;
     > * + * {
       margin-top: 2rem;
     }
@@ -57,6 +72,8 @@ const style = {
   filters: css`
     width: 100%;
     display: flex;
+    border-radius: 0.38rem;
+    overflow: hidden;
     > * + * {
       border-left: 1px solid rgba(0, 0, 0, 0.8);
     }
@@ -65,12 +82,16 @@ const style = {
       padding: 1rem 0;
       text-transform: uppercase;
       font-weight: bold;
+
+      &[data-active="true"] {
+        background: #444;
+      }
     }
   `,
   links: css`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    grid-gap: 0.62rem;
+    grid-gap: 1rem;
     [data-hidden="true"] {
       display: none;
     }
@@ -98,8 +119,8 @@ const style = {
     }
     p {
       position: absolute;
-      top: 0.38em;
-      left: 0.38em;
+      top: 0.5em;
+      left: 0.5em;
       color: #555;
     }
   `,

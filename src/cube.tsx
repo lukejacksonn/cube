@@ -116,7 +116,7 @@ const style = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100svh;
     background: radial-gradient(#222, #111);
   `,
   canvas: css`
@@ -159,6 +159,7 @@ const style = {
       text-transform: uppercase;
       letter-spacing: 0.2em;
       background: #121212;
+      border-radius: 0.38rem;
       padding: 1vmin 2vmin;
       color: rgba(255, 255, 255, 0.38);
       font-weight: bold;
