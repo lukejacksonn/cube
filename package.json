@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy": "npm run build && git add . && git commit -m 'deploy' && git push origin master"
+    "deploy": "vite build && current_version=$(grep '\"version\"' package.json | awk -F: '{gsub(/[\", ]/, \"\", $2); print $2}') && new_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' OFS=.) && jq --arg new_version \"$new_version\" '.version |= $new_version' package.json > tmp_package.json && mv tmp_package.json package.json && git add . && git commit -m \"Deploy $new_version\""
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.8.1",
