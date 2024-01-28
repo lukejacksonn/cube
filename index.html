@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title>Rubiks Cuber</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="application-name" content="Cuber" />
     <meta name="apple-mobile-web-app-title" content="Cuber" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,14 +20,11 @@
       content="Learn how to solve a Rubik’s Cube by exploring algorithms visually."
     />
     <meta name="keywords" content="Rubik’s Cube" />
-    <link rel="apple-touch-icon" href="/static/cuber-favicon-0144x0144.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/180.png" />
     <link rel="stylesheet" type="text/css" href="/src/styles/cube.css" />
     <link rel="stylesheet" type="text/css" href="/src/styles/index.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/static/cuber-favicon-0064x0064.png"
-    />
+    <link rel="icon" type="image/png" href="/icons/64.png" />
     <style>
       html,
       body {
@@ -35,9 +35,17 @@
         overflow: scroll;
         background: #222;
       }
+
+      html:has(body.standalone),
+      body.standalone {
+        height: 100lvh;
+      }
     </style>
     <script src="/cuber.cjs"></script>
     <script src="/index" type="module"></script>
   </head>
   <body></body>
+  <script>
+    window.navigator.standalone && document.body.classList.add("standalone");
+  </script>
 </html>

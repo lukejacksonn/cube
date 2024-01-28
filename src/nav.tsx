@@ -58,11 +58,11 @@ const style = {
       overflow-y: auto;
     }
     background: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 1.38rem;
     height: 100vh;
-    padding: 1.62rem;
-    > * + * {
-      margin-top: 2rem;
-    }
+    padding: 1rem;
     opacity: 0.62;
     transition: opacity 0.62s;
     &:hover {
@@ -70,6 +70,7 @@ const style = {
     }
   `,
   filters: css`
+    flex: none;
     width: 100%;
     display: flex;
     border-radius: 0.38rem;

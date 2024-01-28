@@ -49,7 +49,7 @@ export default (props: { case: Case | undefined }) => {
         <>
           <h1
             className={style.alg}
-            onClick={(e) => {
+            onClick={() => {
               cube.current.twistDuration = speed;
               if (!props.case) return;
               cube.current.twist(interpret(props.case.moves[0]));
@@ -74,6 +74,21 @@ export default (props: { case: Case | undefined }) => {
             }}
           />
           <div className={style.controls}>
+            {/* <button
+              onClick={(e) => {
+                cube.current.twistDuration = speed;
+                cube.current.twist("y");
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path d="m360-160-56-56 70-72q-128-17-211-70T80-480q0-83 115.5-141.5T480-680q169 0 284.5 58.5T880-480q0 62-66.5 111T640-296v-82q77-20 118.5-49.5T800-480q0-32-85.5-76T480-600q-149 0-234.5 44T160-480q0 24 51 57.5T356-372l-52-52 56-56 160 160-160 160Z" />
+              </svg>
+            </button> */}
             <button
               onClick={(e) => {
                 cube.current.twistDuration = speed;
@@ -81,7 +96,15 @@ export default (props: { case: Case | undefined }) => {
                 cube.current.twist(interpret(props.case.moves[0], true));
               }}
             >
-              Reverse
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                style={{ transform: "scaleX(-1)" }}
+              >
+                <path d="m640-280-57-56 184-184-184-184 57-56 240 240-240 240ZM80-200v-160q0-83 58.5-141.5T280-560h247L383-704l57-56 240 240-240 240-57-56 144-144H280q-50 0-85 35t-35 85v160H80Z" />
+              </svg>
             </button>
             <button onClick={centerCube}>
               <svg
@@ -101,8 +124,32 @@ export default (props: { case: Case | undefined }) => {
                 cube.current.twist(interpret(props.case.moves[0]));
               }}
             >
-              Execute
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                style={{ transform: "scaleX(1)" }}
+              >
+                <path d="m640-280-57-56 184-184-184-184 57-56 240 240-240 240ZM80-200v-160q0-83 58.5-141.5T280-560h247L383-704l57-56 240 240-240 240-57-56 144-144H280q-50 0-85 35t-35 85v160H80Z" />
+              </svg>
             </button>
+            {/* <button
+              onClick={(e) => {
+                cube.current.twistDuration = speed;
+                cube.current.twist("Y");
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                style={{ transform: "scaleX(-1)" }}
+              >
+                <path d="m360-160-56-56 70-72q-128-17-211-70T80-480q0-83 115.5-141.5T480-680q169 0 284.5 58.5T880-480q0 62-66.5 111T640-296v-82q77-20 118.5-49.5T800-480q0-32-85.5-76T480-600q-149 0-234.5 44T160-480q0 24 51 57.5T356-372l-52-52 56-56 160 160-160 160Z" />
+              </svg>
+            </button> */}
           </div>
         </>
       )}
@@ -116,7 +163,7 @@ const style = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100svh;
+    height: 100%;
     background: radial-gradient(#222, #111);
   `,
   canvas: css`
@@ -164,8 +211,8 @@ const style = {
       color: rgba(255, 255, 255, 0.38);
       font-weight: bold;
       svg {
-        width: calc(24px + 2vmin);
-        height: calc(24px + 2vmin);
+        width: calc(48px + 2vmin);
+        height: calc(48px + 2vmin);
         fill: currentColor;
       }
     }
