@@ -11,7 +11,7 @@ const App = () => {
   let current = cases.find((x) => x.moves[0].replace(/ /g, "") === route);
   return (
     <>
-      <Cube case={current} />
+      <Cube case={current} go={go} cases={cases} />
       <Nav go={go} route={route} cases={cases} />
     </>
   );

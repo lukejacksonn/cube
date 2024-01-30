@@ -62,7 +62,7 @@ const style = {
     flex-direction: column;
     gap: 1.38rem;
     height: 100vh;
-    padding: 1rem;
+    padding: 1.38rem;
     opacity: 0.62;
     transition: opacity 0.62s;
     &:hover {

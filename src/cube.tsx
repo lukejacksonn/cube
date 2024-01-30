@@ -9,7 +9,11 @@ declare global {
   }
 }
 
-export default (props: { case: Case | undefined }) => {
+export default (props: {
+  case: Case | undefined;
+  go: (x: string) => void;
+  cases: Case[];
+}) => {
   const container = useRef<HTMLDivElement>(null);
   const cube = useRef(new window.ERNO.Cube());
   const [speed, setSpeed] = useState<number>(700);
@@ -45,6 +49,20 @@ export default (props: { case: Case | undefined }) => {
   return (
     <div className={style.container} onDblClick={centerCube}>
       <div className={style.canvas} ref={container}></div>
+      {!props.case && (
+        <>
+          <p className={style.description}>
+            Learn to solve the Rubik's Cube with step by step instructions and
+            visualisations
+          </p>
+          <button
+            onClick={() => props.go(props.cases[0].moves[0].replace(/ /g, ""))}
+            className={style.gettingStarted}
+          >
+            Start Training
+          </button>
+        </>
+      )}
       {props.case && (
         <>
           <h1
@@ -167,14 +185,20 @@ const style = {
     background: radial-gradient(#222, #111);
   `,
   canvas: css`
-    width: calc(var(--vh, 1vh) * 55);
-    height: calc(var(--vh, 1vh) * 55);
+    @media (orientation: landscape) {
+      width: 50vmin;
+      height: 50vmin;
+    }
+    @media (orientation: portrait) {
+      width: 90vmin;
+      height: 90vmin;
+    }
     transform: translateY(-5%);
     animation: bob 3s infinite;
     overflow: hidden;
     &:only-child {
-      width: 70vmin;
-      height: 70vmin;
+      width: 100vmin;
+      height: 100vmin;
       animation: none;
     }
     @keyframes bob {
@@ -200,9 +224,7 @@ const style = {
   `,
   controls: css`
     display: flex;
-
     button {
-      font-size: calc(10px + 1vmin);
       text-transform: uppercase;
       letter-spacing: 0.2em;
       background: #121212;
@@ -211,8 +233,8 @@ const style = {
       color: rgba(255, 255, 255, 0.38);
       font-weight: bold;
       svg {
-        width: calc(48px + 2vmin);
-        height: calc(48px + 2vmin);
+        width: 3rem;
+        height: 3rem;
         fill: currentColor;
       }
     }
@@ -230,5 +252,22 @@ const style = {
     color: #555;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+  `,
+  description: css`
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    padding: 0 2rem;
+    line-height: 162%;
+    margin-bottom: 1rem;
+    max-width: 50ch;
+  `,
+  gettingStarted: css`
+    background: #121212;
+    border-radius: 0.38rem;
+    padding: 1rem 2rem;
+    color: rgba(255, 255, 255, 0.62);
+    font-weight: bold;
+    margin-top: 0.62rem;
   `,
 };

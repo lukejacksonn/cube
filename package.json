@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.5",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "serve": "vite preview",
     "deploy": "vite build && current_version=$(grep '\"version\"' package.json | awk -F: '{gsub(/[\", ]/, \"\", $2); print $2}') && new_version=$(echo $current_version | awk -F. '{$NF = $NF + 1;} 1' OFS=.) && jq --arg new_version \"$new_version\" '.version |= $new_version' package.json > tmp_package.json && mv tmp_package.json package.json && git add . && git commit -m \"Deploy $new_version\" && git push origin master"
