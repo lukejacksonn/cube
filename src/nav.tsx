@@ -31,6 +31,35 @@ export default (props: {
           pll
         </button>
       </div>
+      {filterType && (
+        <div className={style.instructions}>
+          {
+            {
+              f2l: (
+                <p>
+                  The First Two Layers (F2L) should be solved intuitively. The
+                  algorithms here cover most scenarios but you don't need to
+                  learn all of them.
+                </p>
+              ),
+              oll: (
+                <p>
+                  Orienting the last layer (OLL) results in a solved top face. A
+                  "two look" approach drastically reduces the amount of
+                  algorithms required.
+                </p>
+              ),
+              pll: (
+                <p>
+                  Permuting the Last Layer (PLL) results in a solved cube. A
+                  "two look" approach drastically reduces the amount of
+                  algorithms required.
+                </p>
+              ),
+            }[filterType]
+          }
+        </div>
+      )}
       <div className={style.links}>
         {props.cases.map((c) => (
           <a
@@ -88,6 +117,15 @@ const style = {
         background: #444;
       }
     }
+  `,
+  instructions: css`
+    flex: none;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 1rem;
+    line-height: 1.2;
+    background: #333;
+    padding: 1rem;
+    border-radius: 0.38rem;
   `,
   links: css`
     display: grid;
